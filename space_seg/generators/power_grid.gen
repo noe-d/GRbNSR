@@ -1,0 +1,4 @@
+(AFF 
+ (^ dist
+  (* $dist 
+   (ZER $targ_deg (- $orig 1) $orig_deg))) 1 0.0)

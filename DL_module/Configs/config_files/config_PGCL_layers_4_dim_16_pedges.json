@@ -1,0 +1,90 @@
+{
+    "name": "PGCL_default",
+    "n_gpu": 1,
+    "seed":0,
+    "inspect":false,
+    "do_train":true,
+
+    "arch": {
+        "type": "PGCLModel",
+        "args":{
+            "encoder_name":"pgcl",
+            "encoder_args":{
+                "num_gc_layers":4,
+                "dim":16,
+                "num_features":1
+            },
+            "nmb_prototypes": 8,
+            "alpha": 0.5,
+            "beta": 1.0,
+            "gamma": 0.1,
+            "prior":true
+        }
+    },
+    "dataset": {
+        "type": "PGCLDataset",
+        "args":{
+            "dgl_graphs": "../data/data_gnns/graphs_catalogue.csv",
+            "verbosity":true,
+            "from_csv":true,
+            "aug":"dnodes",
+            "stro_aug":"none",
+            "weak_aug2":"pedges"
+        }
+    },
+    "data_loader": {
+        "batch_size":128,
+        "pin_memory":true,
+        "shuffle":false
+    },
+    "optimizer": {
+        "type": "Adam",
+        "args":{
+            "lr":0.01
+        }
+    },
+    "lr_scheduler": {
+        "type": "StepLR",
+        "args": {
+            "step_size": 50,
+            "gamma": 0.1
+        }
+    },
+    "loss": "cluster_consistency",
+    "loss_type":{
+        "type":"ClusteringConsistency",
+        "args":{
+            "use_queue":true,
+            "epsilon":0.05,
+            "world_size":1,
+            "sinkhorn_iterations":3,
+            "temperature":0.2,
+            "hard_selection":true,
+            "sample_reweighting":false
+        }
+    },
+    "metrics": [
+        "accuracy", "top_k_acc"
+    ],
+    "trainer_type":{
+        "type":"PGCLTrainer",
+        "args":{
+            "use_queue":true,
+            "queue_length":1792,
+            "crops_for_assign":[0,1],
+            "nmb_crops":[2]
+        }
+    },
+    "trainer": {
+        "epochs": 100,
+
+        "save_dir": "saved/",
+        "save_period": 0.1,
+        "verbosity": 2,
+        
+        "monitor": "min loss",
+        "early_stop": 10,
+
+        "tensorboard": false
+    }
+}

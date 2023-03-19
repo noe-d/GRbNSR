@@ -1,0 +1,1 @@
+{"name": "Baseline", "do_train": false, "seed": 0, "arch": {"type": "TradModel", "args": {"model_name": "trad", "stats_dict": {"deg": {"bins": 64, "range": [0, 752.0]}}}}}

@@ -1,0 +1,6 @@
+(ZER 
+ (- $targ_deg 
+  (< $orig_deg 4 0 $orig_deg)
+ )
+ (LOG $orig) (- 0.0 1)
+)
