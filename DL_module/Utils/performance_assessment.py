@@ -21,7 +21,7 @@ _SELECTED_TUDATA = [
     "IMDB-BINARY",
     "IMDB-MULTI",
     "PROTEINS",
-    "DD"
+    "MUTAG"
 ]
 _DEFAULT_RUN_IDS = [
     0,
@@ -43,39 +43,44 @@ def main(
     **kwargs,
 ):
     if save_dir.endswith(".json"):
-        # load config and retrieve correct path
-        pass
-    
-    for run_id in run_ids:
-        path_to_dir = save_dir+str(run_id)+"/"
-        
-        # assess performance from model_best.pth
         for data in datasets:
             model_test = testmodel_dataset(
-                model=path_to_dir+"model_best.pth",
+                model=save_dir,
                 dataset=data,
                 **kwargs
             )
-            
-            model_test.write_results_csv(
-                path_to_csv = save_dir+"best_results.csv",
-                data_name = data,
-                run_id=run_id
-            )
-        
-            # assess performance of model_untrained.pth ?
-            if assess_untrained:
+    
+    else:
+        for run_id in run_ids:
+            path_to_dir = save_dir+str(run_id)+"/"
+
+            # assess performance from model_best.pth
+            for data in datasets:
                 model_test = testmodel_dataset(
-                    model=path_to_dir+"model_untrained.pth",
+                    model=path_to_dir+"model_best.pth",
                     dataset=data,
                     **kwargs
                 )
 
                 model_test.write_results_csv(
-                    path_to_csv = save_dir+"untrained_results.csv",
+                    path_to_csv = save_dir+"best_results.csv",
                     data_name = data,
                     run_id=run_id
                 )
+
+                # assess performance of model_untrained.pth ?
+                if assess_untrained:
+                    model_test = testmodel_dataset(
+                        model=path_to_dir+"model_untrained.pth",
+                        dataset=data,
+                        **kwargs
+                    )
+
+                    model_test.write_results_csv(
+                        path_to_csv = save_dir+"untrained_results.csv",
+                        data_name = data,
+                        run_id=run_id
+                    )
     
 
 

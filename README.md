@@ -20,6 +20,12 @@
 ## 🏔 Repository goals
 <p align="right"><a href="#top">🔝</a></p>
 
+The present hosts the code to reproduce and/or replicate the experiments presented in the Master Thesis *Graph Representation based Network Symbolic Regression* undertook from October 2022 to April 2023 at Centre Marc Bloch's Computational Social Science Team, in the context of EPFL's Digital Humanities master program.
+
+The main goal of this repository is to better understand Graph Representation Learning through the empirical analysis of the spatial representation induced by such models, as well as probing their efficiency in tasks departing from standard classification.
+
+The repository provides two foundation modules, [`DL_module`](./DL_module/) and [`synthetic`](./synthetic/), together with ensuing analysis and application modules: [`reproducibility`](./reproducibility/) and [`space_seg`](./space_seg/).
+
 TODO:
 - [ ] motivations / research questions / aims
 - [ ] different resources gathered etc.
@@ -30,6 +36,11 @@ TODO:
 
 ### Set up
 
+```shell
+conda create -n env_grl python=3.10.6 jupyterlab
+pip install -r requirements.txt
+```
+
 TODO:
 - [ ] coarse description of the content of the folder
 - [ ] instructions on how to make things run / set up
@@ -37,15 +48,12 @@ TODO:
 ### Run the code
 
 TODOs:
+- [ ] download options (code and data)
 - [ ] train DL model
   - [ ] assess performances
   - [ ] visualise embeddings
 - [ ] analyse segregative capabilities on synthetic generated graphs
 - [ ] reproduce symbolic regression
-
-<a class="anchor" id="roadmap"></a>
-## 🛤 Roadmap
-<p align="right"> (&rarr; <a href="./ROADMAP.md"> 🛤 ROADMAP.md</a> ) <a href="#top">🔝</a></p>
 
 
 ---
@@ -71,81 +79,22 @@ Sumary. Phasellus diam magna, consequat ac dictum nec, aliquam eu nunc. Aliquam 
 > This is a note
 
 ---
-TODOS for each of the sub-sections:
-- [ ] research question / motivations
-  - [ ] repro
-  - [ ] space_seg
-  - [ ] exps...
-- [ ] links to the folders
-  - [x] repro
-  - [x] space_seg
-  - [ ] exps...
-- [ ] few lines on whats going on in the code
-  - [ ] repro
-  - [ ] space_seg
-  - [ ] exps...
-- [ ] display main outputs
-  - [ ] repro
-  - [ ] space_seg
-  - [ ] exps...
 
 
 <a class="anchor" id="reproducibility"></a>
-## 🎰 Reproducibility
-<p align="right"><a href="#top">🔝</a></p>
-
-### Evolutionary search [2014]
-<p align="right">( <a href="./reproducibility">Folder</a> • <a href="./reproducibility/README.md">How to ?</a> • <a href="./repro_evo.ipynb">Demo</a> ) <a href="#reproducibility">🎰</a></p>
+## 🧭 Network Symbolic Regression
+<p align="right">( <a href="./reproducibility">Folder</a> • <a href="./reproducibility/README.md">How to ?</a> • <a href="./repro_evo.ipynb">Demo</a> ) <a href="#top">🔝</a></p>
 
 <details><summary>⚙️ Process</summary><br/>
 
 </details>
 
 <details><summary>🔮 Output</summary><br/>
-
-Objectives: replication of the following figures:
-
-**Table 2:** evolutionary search of the best generator and visual comparison of the outputs
-<p align="center">
-  <picture>
-    <source srcset="./illustrations/obj/2014_tab2.png">
-    <img width=80% alt="Illustration - Space Discrimination from degrees.">
-  </picture>
-</p>
-
-**Figure 4:** generator dissimilarity (computed through generative process) vs. fitness (av. score over 30 runs (?))
-<p align="center">
-  <picture>
-    <source srcset="./illustrations/obj/2014_fig4.png">
-    <img width=80% alt="Illustration - Space Discrimination from degrees.">
-  </picture>
-</p>
-
-</details>
-
-### Generators' families [2019]
-<p align="right">( <a href="./reproducibility">Folder</a> • <a href="./reproducibility/README.md">How to ?</a> • <a href="./repro_fams.ipynb">Demo</a> ) <a href="#reproducibility">🎰</a></p>
-
-<details><summary>⚙️ Process</summary><br/>
-
-</details>
-
-<details><summary>🔮 Output</summary><br/>
-
-Objectives: replication of the following figures:
-
-**Figure 3:** MDS projection of generator's instances pairwise-distances
-<p align="center">
-  <picture>
-    <source srcset="./illustrations/obj/2019_fig3.png">
-    <img width=80% alt="Illustration - Space Discrimination from degrees.">
-  </picture>
-</p>
 
 </details>
 
 <a class="anchor" id="space_segregation"></a>
-## 🔭 Space Segregation
+## 🔎 Space Segregation
 <p align="right"> ( <a href="./space_seg">Folder</a> • <a href="./space_seg/README.md#-5-usage-">How to ?</a> • <a href="./space_seg.ipynb">Demo</a> ) <a href="#top">🔝</a></p>
 
 <details><summary>⚙️ Process</summary><br/>
@@ -163,10 +112,6 @@ Objectives: replication of the following figures:
 </p>
 
 </details>
-
-<a class="anchor" id="additional_experiments"></a>
-## 🧫 Additional experiments
-<p align="right"> ( <a href="./add_exps">Folder</a> • <a href="./add_exps/README.md#-5-usage-">How to ?</a> • <a href="./add_exps.ipynb">Demo</a> ) <a href="#top">🔝</a></p>
 
 ---
 <a class="anchor" id="structure"></a>

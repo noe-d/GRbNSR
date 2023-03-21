@@ -54,6 +54,7 @@ XX TODO requirements XX
 
 ```shell
 pip install -r requirements.txt
+conda install graph-tool
 ```
 
 ### 1.b Train a model
