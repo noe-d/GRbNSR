@@ -237,6 +237,8 @@ class Generator(object):
             orig, targ = self.cycle()
 
             if shadow is not None:
+                if shadow.sample_weights is None:
+                    shadow.sample_weights = self.sample_weights
                 shadow.cycle(self)
                 self.eval_distance += self.weights_dist(shadow)
 

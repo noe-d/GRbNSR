@@ -12,7 +12,6 @@ from sklearn import mixture
 import sklearn.base as sklearn_base
 from scipy import linalg
 
-
 #ve_dict=ve_dict,
 #ax = ax,
 #title = title,
@@ -23,7 +22,7 @@ def visualise_kde(
     title = None,
     legend=True,
     alpha=0.4,
-    reducer=None,
+    reducer=TSNE(),
 ):
     df_plot = pd.DataFrame()
     
@@ -68,6 +67,7 @@ def visualise_gmm(
         covar,
         color,
         alpha=0.4,
+        reducer=TSNE()
     ):
         v, w = linalg.eigh(covar)
         v = 2.0 * np.sqrt(2.0) * np.sqrt(v)
@@ -110,11 +110,16 @@ def visualise_gmm(
     # fit
     #gmm.fit(ve_dict["embs"])
     
+    embs = np.array(ve_dict["embs"])
+    
+    if (not reducer is None) and (len(ve_dict["embs"][-1])!=2):
+        embs = reducer.fit_transform(embs)
+    
     for lab in unique_labels:
         lab_gmm = sklearn_base.clone(gmm)
         
         lab_mask = np.array(ve_dict["labels"])==lab
-        lab_embs = np.array(ve_dict["embs"])[lab_mask]
+        lab_embs = np.array(embs)[lab_mask]
         
         lab_gmm.fit(lab_embs)
         
@@ -126,8 +131,8 @@ def visualise_gmm(
         )
         
     if show_pnts:
-        x1s = np.array(ve_dict["embs"])[:,0]
-        x2s = np.array(ve_dict["embs"])[:,1]
+        x1s = np.array(embs)[:,0]
+        x2s = np.array(embs)[:,1]
         ax.scatter(x1s, x2s
                    , marker='x'
                    , c=[lab2color[lab] for lab in ve_dict["labels"]]
@@ -135,8 +140,8 @@ def visualise_gmm(
                   )
         
     else:
-        x_lims = (np.min(np.array(ve_dict["embs"])[:,0]), np.max( np.array(ve_dict["embs"])[:,0]))
-        y_lims = (np.min(np.array(ve_dict["embs"])[:,1]), np.max( np.array(ve_dict["embs"])[:,1]))
+        x_lims = (np.min(np.array(embs)[:,0]), np.max( np.array(embs)[:,0]))
+        y_lims = (np.min(np.array(embs)[:,1]), np.max( np.array(embs)[:,1]))
         
         def dilat_lims(lims, dilat_coef = lims_dilat):
             dilat = (lims[0]-(lims[0]/np.abs(lims[0]))*dilat_coef*lims[0],

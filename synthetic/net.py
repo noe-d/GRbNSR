@@ -56,3 +56,8 @@ class Net:
 
     def out_neighbors(self, node):
         return self.graph.neighbors(node, mode='out')
+    
+    # custom
+    def get_feature(self, node, feat):
+        feat_cleaned = feat.replace("targ_", "").replace("orig_", "")
+        return self.graph.vs[node].attributes()[feat_cleaned]

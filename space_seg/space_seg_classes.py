@@ -20,7 +20,7 @@ from synthetic.net import load_net
 # %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 N_GRAPHS = 64
 GEN_PATH = "space_seg/generators/"
-DATA_PATH = "space_seg/data/data_v2/"
+DATA_PATH = "./data/space_seg_data/"
 
 N_PROCESSES = 2
 # %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -305,6 +305,7 @@ class SynEmbAnalyzer():
                   #figsize=(20,20),
                   return_fig = False,
                   dark_mode = False,
+                  reducer=None,
                  ):
         # init figure --> make grid
         nrows, ncols = self.computed_grid.shape[0], self.computed_grid.shape[1]
@@ -341,6 +342,7 @@ class SynEmbAnalyzer():
                         ax=curr_ax,#axes[i,j],
                         title=ve,
                         dark_mode = dark_mode,
+                        reducer=reducer,
                     )
                 else:
                     remove_frame(ax=curr_ax)
