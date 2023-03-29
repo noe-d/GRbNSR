@@ -42,15 +42,14 @@ Detailed instructions on how to use the code and/or custom it to ones needs are 
 
 ## 🪩 0. Features <a class="anchor" id="features"></a>
 
-- train models
-- evaluate performance on selected tasks
-- visualise graphs embeddings
+This repository can be used to:
+- train GRL models;
+- evaluate performances of the models on selected tasks;
+- visualise the embeddings produced by the models.
 
 ## ⚡️ 1. Quick start <a class="anchor" id="quick_start"></a>
 
 ### 1.a Installation
-
-XX TODO requirements XX
 
 ```shell
 pip install -r requirements.txt
@@ -67,44 +66,66 @@ You can then visualise the learnt graphs representations with:
 ```shell
 python viz.py --c <config_file_path>.json --n
 ```
+
+> **Note**
+> You can also launch the [companion notebook 🔗](./pipeline.ipynb) for a step-by-step tutorial.
+
+
 ---
 ## <a class="anchor" id="gnns"></a> 🌻 2. Graph Neural Networks
 <p align="right"><a href="#top">🔝</a></p>
 
-### <a class="anchor" id="models_arch"></a> 2.a Models' architecture
 
-| Method Name | Paradigm | XX | XX |
-|:---|:---:|:---:|:---:|
-|GraphMAE [[1]](#bib_graphmae)<a class="anchor" id="ref_graphmae_2"></a>|Generative|XX|XX|
-|PGCL [[2]](#bib_pgcl)<a class="anchor" id="ref_pgcl_2"></a>|Contrastive|XX|XX|
+### <a class="anchor" id="models_arch"></a> 2.a Self-Supervised models
+
+Self-supervised learning is an attractive training paradigm in the big data era. It aims at mitigating the over-dependence of DL models on labeled data by devising training procedure from pretext tasks that don't require labels.
+
+
+This repository shelters the implementation of two state-of-the-art self-supervised GRL models: GraphMAE [[1]](#bib_graphmae)<a class="anchor" id="ref_graphmae_2"></a> and PGCL [[2]](#bib_pgcl)<a class="anchor" id="ref_pgcl_2"></a>.
+These two models stem the two main subdomain of SSL: predictive and contrastive learning.
+
+On one hand, Graph Masked Auto-Encoder (GraphMAE) is a generative method that aims at reconstructing node features (which are hidden during training).
+
+On the other hand, Prototypical Graph Contrastive Learning (PGCL) is a contrastive learning model that was notably devised to alleviate the *sampling bias* harming contrastive methods.
 
 ### <a class="anchor" id="encoding_layers"></a> 2.b Encoding Layers
 
+Most of GRL models (including GraphMAE and PGCL) rely on Graph Neural Networks (GNNs): adaptation of neural networks to handle graph-structured data. GNN layers are the backbone of these models and can often be used interchangeably.
+
+GNNs implement message-passing methods that iteratively aggregate and combine information of nodes and their neighbours. They ultimately produce graphs of nodes' states with the same topology as the input graph.
+
+Three of the most popular GNN instances are:
 - Graph Attention layer (GAT)
 - Graph Convolutional Network (GCN)
-- Graph Isomorphism Network (GIN) [DGL doc](https://docs.dgl.ai/api/python/nn-pytorch.html#conv-layers), [[X]]()
+- Graph Isomorphism Network (GIN)
+
+Then, a pooling layer can be used to obtain whole-graph representation from the nodes states.
 
 ## 🧳 3. Graphs Datasets<a class="anchor" id="graphs_datasets"></a>
 <p align="right"><a href="#top">🔝</a></p>
 
-TODO:
- - [ ] explaing the overall setting (self-supervised)
- - [ ] ambitions: agnostic, general enough, still efficient
+The main goal of this repository is to enable the implementation of self-supervised methods. Those are meant to be general enough to tackle various tasks, while still being achieving high-performances.
 
+With this in mind, a dataset containing graph from various domains and with different sizes is designed to train the models. Then the models are evaluated on standard graph classification baselines.
 
 ### 3.a Training
 
-Netzschleuder hosted by `graph-tool` library [[5]](#bib_graphtool)<a class="anchor" id="ref_graphtool_3_a"></a>.
+The training dataset is based on the Netzschleuder catalogue that references graphs hosted by `graph-tool` library [[5]](#bib_graphtool)<a class="anchor" id="ref_graphtool_3_a"></a>.
+The training dataset is obtained by setting a few constraints on the types of graphs (number of edges, balance, etc.). Thanks to `graph-tool` implementation, it can easily be loaded within python pipelines and used to train the models.
 
 ### 3.b Evaluation
 
-TUDataset [[6]](#bib_tudataset)<a class="anchor" id="ref_tudataset_3_b"></a>.
+The evaluation of the trained models is performed on the most common benchmark in the literature: graph classification on a subset of datasets from the TUDataset [[6]](#bib_tudataset)<a class="anchor" id="ref_tudataset_3_b"></a>.
 
 ## ⚙️ 4. Implementation <a class="anchor" id="implementation"></a>
 <p align="right"><a href="#top">🔝</a></p>
 
 ![](./illustrations/implementation_ideation.png)
 
+The proposed implementation is flexible and provides ways to implement new models based on general modules.
+The implementation of the Deep Learning pipeline is composed of 4 main components meant to be customisable and adaptable to fit different frameworks. Each of the module can be modified or instanciated differently to render different models.
+
+These four components allow to load graphs datasets, implement models and their backbone encoders and to train the models:
 - `GraphDataset` (see [code](./DataLoader/data_loader.py))
 - `GRSSLModel` (see [code](./Models/model_grssl.py))
   - `Encoder` (see [code](./Models/encoders.py))
@@ -134,160 +155,37 @@ Then the performances of each of the 5 models are assessed (both before and afte
 ### <a class="anchor" id="configurations"></a>5.a Configurations
 <p align="right"><a href="#usage">🫧</a></p>
 
-XX Do a ConfigParser card + describe main parameters XX
+The configurations of the models are provided as `.json` files containing all the required parameters and hyperparameters from the loading of the training dataset to the model's architectures details and the training scheme to follow.
 
-<details><summary>GraphMAE Configuration</summary><br/>
-Specific arguments and parameters
+See example configuration files in [this folder 🔗](./Configs/config_files/).
 
-Example:
-```yaml
-{
-    "name": "GraphMAE",
-    "n_gpu": 1,
-    "seed":0,
-    "inspect":false,
-    "do_train":true,
-
-    "arch": {
-        "type": "GraphMAEModel",
-        "args":{
-            "encoder_name":"gcn",
-            "encoder_args":{
-                "num_layers":4,
-                "input_dimension":512,
-                "output_dimension":64,
-                "hidden_dimension":64,
-                "activation":"relu",
-                "dropout":0.0,
-                "layernorm":false
-            },
-            "decoder_name":"gcn",
-            "mask_rate":0.5,
-            "drop_edge_rate":0.0
-        }
-    },
-    "dataset": {
-        "type": "GraphMAEDataset",
-        "args":{
-            "dgl_graphs": "../data/data_gnns/graphs_catalogue.csv",
-            "verbosity":true,
-            "MAX_DEGREES": 511,
-            "feature_dim":512,
-            "from_csv":true
-        }
-    },
-    "data_loader": {
-        "batch_size":64,
-        "pin_memory":true,
-        "shuffle":false,
-        "sampler":"SubsetRandomSampler",
-        "collate_fn":"collate_fn_graphmae"
-    },
-    "optimizer": {
-        "type": "Adam",
-        "args":{
-            "lr": 0.00015,
-            "weight_decay": 0.0,
-            "amsgrad": true
-        }
-    },
-    "loss": "sce",
-    "loss_type":{
-        "type":"SCELoss",
-        "args":{
-            "alpha":3
-        }
-    },
-    "metrics": [
-        "accuracy", "top_k_acc"
-    ],
-    "lr_scheduler": {
-        "type": "StepLR",
-        "args": {
-            "step_size": 50,
-            "gamma": 0.1
-        }
-    },
-    "trainer_type":{
-        "type":"GraphMAETrainer",
-        "args":{
-        }
-    },
-    "trainer": {
-        "epochs": 100,
-
-        "save_dir": "saved/repro/",
-        "save_period": 0.1,
-        "verbosity": 2,
-
-        "monitor": "min loss",
-        "early_stop": 10,
-
-        "tensorboard": false
-    }
-}
-```
-</details>
-
-<details><summary>PGCL Configuration</summary><br/>
-Specific arguments and parameters
-</details>
 
 ### <a class="anchor" id="results"></a> 5.b Results
 <p align="right"><a href="#usage">🫧</a></p>
 
-#### <a class="anchor" id="downloads"></a> Download models ?
+Results obtained through this pipeline are described below.
 
 #### <a class="anchor" id="runtimes"></a> Expected runtimes
 
-XX Details about the machine XX
+First note that all computation were undertaken on a MacBook Pro (M1, 2020).
 
-|Model type|Configuration|Average training time|Av. epoch time|Av. embedding time|
+The expected runtimes for the training are shown in the following table:
+
+|Model type|Configuration|Average training time|Av. epoch time|
 |:---|:---:|---:|---:|---:|
-|GraphMAE|[config link](./Configs/config_files/config_graphmae_repro.json)|02:23:14|00:01:54|00:00:00|
-|PGCL|[config link](./Configs/config_files/config_pgcl_repro.json)|07:01:16|00:04:49|00:00:00|
+|GraphMAE|[config link](./Configs/config_files/config_graphmae_repro.json)|02:23:14|00:01:54|
+|PGCL|[config link](./Configs/config_files/config_pgcl_repro.json)|07:01:16|00:04:49|
 
 #### <a class="anchor" id="performances"></a> Classification performances
 
-The performances of the models are assessed on several graphs datasets selected from the TU datasets [XX TODO cite XX]. Those datasets are widely used in the literature and provide common basis for models' comparison.
-The performances are computed by appending a SVC-classifier [XX TODO cite XX] on top of the representations computed by the different models.
+The performances of the models are assessed on several graphs datasets selected from the TU datasets. Those datasets are widely used in the literature and provide common basis for models' comparison.
+The performances are computed by appending a SVC-classifier on top of the representations computed by the different models.
 
 The outcome of the performance assessment are compiled in the table below. The average micro-F1 score upon 10-fold classification is reported for each dataset and each of the models.
 
 <details><summary>Instructions to run tests</summary><br/>
-XX TODO UPDATE XX
 
-Detailed instructions to run specific tests and outputs
-
-For example to run tests on a dataset from TUDataset [[6]](#bib_tudataset)<a class="anchor" id="ref_tudataset_1"></a>.
-
-```python
-from Utils.tasks import testmodel_classification
-
-tudata_name = "REDDIT-BINARY"
-
-test_classification = testmodel_classification(
-   model = "saved/best_models/dummiest/",
-   dataset = "REDDIT-BINARY"
-)
-```
-
-Then, running
-```python
-test_classification.print_scores()
-```
-would yield the following:
-```
-Scores:
-	- Micro-F1 = 0.8335
-	- Micro-F1 (std.) = 0.0227
-	- most_frequent - micro-F1 = 0.5
-	- most_frequent - micro-F1 (std.) = 0
-	- uniform - micro-F1 = 0.489
-	- uniform - micro-F1 (std.) = 0.02142
-```
-
-This process can be repeated for several models and datasets. This is implemented in [`Utils/performance_assessment.py`](./Utils/performance_assessment.py). It can directly be run with the following command line:
+The evaluation procedure is implemented in [`Utils/performance_assessment.py`](./Utils/performance_assessment.py). It can be run with the following command line:
 
 ```shell
 python Utils/performance_assessment.py\
@@ -309,9 +207,6 @@ This script will store the results in a `.csv` file at the level of `<PATH_TO_SA
 
 <details><summary>Compare with performances BEFORE training</summary>
 
-TODO:
-- [ ] cf. Reservoir computing etc.
-
 |Model (config)|Custom (Training)|REDDIT-BINARY|COLLAB|IMDB-BINARY|IMDB-MULTI|PROTEINS|DD|
 |:---|---:|---:|---:|---:|---:|---:|---:|
 |GraphMAE <br>[[ config ]](./Configs/config_files/config_graphmae_repro.json)<br>Relative Change|94.0 (&plusmn;0.2)<br> ↓ <br>- 0.8%|87.6 (&plusmn;0.3)<br> ↓ <br>- 2.7%|78.2 (&plusmn;0.3)<br> ↓ <br>- 1.7%|73.0 (&plusmn;1.0)<br> = <br>- 0.4%|50.5 (&plusmn;0.6)<br> = <br>+ 0.1%|74.0 (&plusmn;0.7)<br> = <br>- 0.4%|76.2 (&plusmn;0.6)<br> = <br>+ 0.5%|
@@ -319,6 +214,7 @@ TODO:
 
 </details>
 
+<!--
 <details><summary> Embedding Time</summary>
 
 The table below reports the time taken by the different models to get the representations of all graphs of the datasets:
@@ -331,6 +227,7 @@ The table below reports the time taken by the different models to get the repres
 |PGCL <br>[[ config ]](./Configs/config_files/config_pgcl_repro.json)|00:00:00|00:00:00|00:00:00|00:00:00|00:00:00|00:00:00|00:00:00|
 
 </details>
+-->
 
 <!-- ⚠️ Previous Version
 <details><summary> Previous table </summary>
@@ -393,9 +290,6 @@ python viz.py -d "REDDIT-BINARY"\
 
 <details><summary>Gallery</summary><br/>
 
-XX TODO fill table with visualisations XX
-
-TSNE or so- 2 rows, 3 columns: visualisation of the embedding of the dataset with the GCC/GraphMAE and GAT/GCN/GIN
 <!--
 <table>
 	<tr>
@@ -564,7 +458,7 @@ DL_module/
 
 ### Bibliography
 
-<a class="anchor" id="bib_graphmae"></a> [1] (^back to: [<sup>📦</sup>](#ref_graphmae_1); [<sup>2.a</sup>](#ref_graphmae_2)) [ [paper](https://arxiv.org/abs/2205.10803) | [code](https://github.com/THUDM/GraphMAE) ] <br> Hou, Z., Liu, X., Dong, Y., Wang, C., & Tang, J. (2022). GraphMAE: Self-Supervised Masked Graph Autoencoders. arXiv *preprint arXiv:2205.10803*.
+<a class="anchor" id="bib_graphmae"></a> [1] (^back to: [<sup>0.</sup>](#ref_graphmae_1); [<sup>2.a</sup>](#ref_graphmae_2)) [ [paper](https://arxiv.org/abs/2205.10803) | [code](https://github.com/THUDM/GraphMAE) ] <br> Hou, Z., Liu, X., Dong, Y., Wang, C., & Tang, J. (2022). GraphMAE: Self-Supervised Masked Graph Autoencoders. arXiv *preprint arXiv:2205.10803*.
 
 <a class="anchor" id="bib_pgcl"></a> [2] (^back to: [<sup>0.</sup>](#ref_pgcl_1); [<sup>2.a</sup>](#ref_pgcl_2)) [ [paper](https://arxiv.org/pdf/2106.09645) | [code](https://github.com/ha-lins/PGCL) ]
 Lin, S., Liu, C., Zhou, P., Hu, Z. Y., Wang, S., Zhao, R., ... & Liang, X. (2022). Prototypical Graph Contrastive Learning. *IEEE Transactions on Neural Networks and Learning Systems*.

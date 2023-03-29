@@ -108,6 +108,7 @@ class GraphDataset(Dataset):
     def display_statistics(self,):
         nodes = [graph.num_nodes() for graph in self.graphs]
         edges = [graph.num_edges() for graph in self.graphs]
+        mean_degrees = [np.mean(np.array(graph.in_degrees())) for graph in self.graphs]
         
         stats = {
             "number of graphs": len(self.graphs),
@@ -123,6 +124,12 @@ class GraphDataset(Dataset):
             "edges — median": np.median(edges),
             "edges — min": np.min(edges),
             "edges — max": np.max(edges),
+            
+            #"av. deg — tot": np.sum(mean_degrees),
+            "av. deg — mean": np.mean(mean_degrees),
+            "av. deg — median": np.median(mean_degrees),
+            "av. deg — min": np.min(mean_degrees),
+            "av. deg — max": np.max(mean_degrees),
         }
         
         if self.graphs_labels is not None:
