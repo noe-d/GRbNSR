@@ -270,7 +270,8 @@ class SynEmbAnalyzer():
         self.unique_vs = sorted(np.unique([ve[0] for ve in computed_ve_pairs]))
         self.unique_es = sorted(np.unique([ve[1] for ve in computed_ve_pairs]))
         
-        if not common_p
+        self.common_p = common_p
+        if not common_p:
             self.computed_grid = np.array(
                 [
                     [
@@ -281,12 +282,23 @@ class SynEmbAnalyzer():
                 ]
             , dtype=object)
         
-        if common_p:
+        else:
+            vp_pairs = [(k[0], np.round(sparsity(k[0], k[1]), sparsity_round)) for k in self.ve_pairs]
+            unique_ps = sorted(np.unique([vp[1] for vp in vp_pairs]))
+            dict_vp_to_e = {}
+            for v in self.unique_vs:
+                for e in self.unique_es:
+                    p = np.round(sparsity(v, e), sparsity_round)
+                    dict_vp_to_e[(v, p)] = e
+                for p in unique_ps:
+                    if (v, p) not in dict_vp_to_e.keys():
+                        dict_vp_to_e[(v,p)] = 0.
+            
             self.computed_grid = np.array(
                 [
                     [
-                        (v,np.round(sparsity(v,e), sparsity_round)) if (v,e) in self.ve_pairs else False
-                        for e in self.unique_es
+                        (v, dict_vp_to_e[(v, p)]) if (v, dict_vp_to_e[(v, p)]) in self.ve_pairs else False
+                        for p in unique_ps
                     ]
                     for v in self.unique_vs
                 ]
