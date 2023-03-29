@@ -16,11 +16,13 @@
 
 ![files](https://tokei.rs/b1/github/noe-d/AlignmentTool?category=files) ![codelines](https://tokei.rs/b1/github/noe-d/AlignmentTool?category=code) ![comments](https://tokei.rs/b1/github/noe-d/AlignmentTool?category=comments)
 
+*[WIP] This repository needs to be further cleaned.*
+
 <a class="anchor" id="repository_goals"></a>
 ## 🏔 Repository goals
 <p align="right"><a href="#top">🔝</a></p>
 
-The present hosts the code to reproduce and/or replicate the experiments presented in the Master Thesis *Graph Representation based Network Symbolic Regression* undertook from October 2022 to April 2023 at Centre Marc Bloch's Computational Social Science Team, in the context of EPFL's Digital Humanities master program.
+The present repository hosts the code to replicate the experiments presented in the Master Thesis *Graph Representation based Network Symbolic Regression* undertook from October 2022 to April 2023 at Centre Marc Bloch's Computational Social Science Team, in the context of EPFL's Digital Humanities master program.
 
 The main goal of this repository is to better understand Graph Representation Learning through the empirical analysis of the spatial representation induced by such models, as well as probing their efficiency in tasks departing from standard classification.
 
@@ -60,23 +62,30 @@ TODOs:
 
 <a class="anchor" id="synthetic"></a>
 ## 🌳 Synthetic
-<p align="right">( <a href="./synthetic">Folder</a> • <a href="./synthetic/README.md#usage">How to ?</a> ) <a href="#top">🔝</a></p>
+<p align="right">( <a href="./synthetic">Folder</a> ) <a href="#top">🔝</a></p>
 
-Sumary. Phasellus diam magna, consequat ac dictum nec, aliquam eu nunc. Aliquam et congue quam. In sagittis lectus tellus, a euismod magna malesuada a. Aliquam malesuada fermentum risus sed egestas. Nunc nisl odio, tristique eget mattis non, sodales varius erat.
+The [synthetic folder](./synthetic) hosts the code for the network symbolic regression <a class="anchor" id="ref_2014_0">[[1]](#bib_2014).
 
-> **Warning**
-> This is a note
+This algorithm draws from genetic programming in order to retrieve plausible generative processes responsible for a target network through mutations and selection mechanisms.
+The notion of generators and the definition of distances between graphs, used to guide the selection process, are two cornerstones of this algorithm. Both are then combined to perform evolutionary search in order to retrieve a satisfying solution in an iterative manner.
 
-Mauris sed congue elit. Sed commodo leo augue, a commodo eros lobortis quis. Ut luctus fringilla ligula, sit amet consectetur purus sollicitudin non. Duis ornare ipsum ipsum, sed rhoncus odio varius non. Nulla cursus pulvinar lacus, ac egestas tortor euismod vitae. Nulla sollicitudin, nulla quis facilisis viverra, ipsum turpis cursus velit, id bibendum lectus lectus nec turpis.
+*Generators* are construed as iterative stochastic procedures that produce links one by one based on probabilistic preferences to construct graphs. The probabilistic weights are determined by mathematical functions applied to variables of the graphs such as nodes' degree, distance between nodes or nodes' identifiers for instance.
+
+In the original paper, the distance between networks is computed by comparing summary statistics of pre-determined features from the graph, eg. degree centralities distribution or pattern counts.
+
+In practice, given a target graph, the algorithm performs an evolutionary search in the space of generators, and outputs the best generator found to fit the network under the form of a tree-based computer program.
 
 <a class="anchor" id="dl_module"></a>
 ## 🌊 DL Module
 <p align="right">( <a href="./DL_module">Folder</a> • <a href="./DL_module/README.md#-5-usage-">How to ?</a> ) <a href="#top">🔝</a></p>
 
-Sumary. Phasellus diam magna, consequat ac dictum nec, aliquam eu nunc. Aliquam et congue quam. In sagittis lectus tellus, a euismod magna malesuada a. Aliquam malesuada fermentum risus sed egestas. Nunc nisl odio, tristique eget mattis non, sodales varius erat. Maecenas consequat semper sapien, non mattis dui blandit vel. Quisque eget mattis urna, ac sodales massa. Mauris sed congue elit. Sed commodo leo augue, a commodo eros lobortis quis. Ut luctus fringilla ligula, sit amet consectetur purus sollicitudin non. Duis ornare ipsum ipsum, sed rhoncus odio varius non. Nulla cursus pulvinar lacus, ac egestas tortor euismod vitae. Nulla sollicitudin, nulla quis facilisis viverra, ipsum turpis cursus velit, id bibendum lectus lectus nec turpis. Aliquam eu dui ut odio ornare sodales. Maecenas bibendum porttitor libero, non ullamcorper mauris finibus ac.
+The [deep learning module](./DL_module) is leveraged to obtain GRL models. Indeed, the aim of this repository is to probe the capabilities of such technologies in different settings.
 
-> **Note**
-> This is a note
+Inspired by the paradigmatic shift towards pre-trained foundation models in various ML fiels, we focused on self-supervised models. Two state-of-the-art self-supervised GRL models are re-implemented: GraphMAE and PGCL.
+
+The DL module enables to train these models and to evaluate them on standard graph classification benchmarks.
+
+The general idea is to get pre-trained models that can produce vector representation of any input graph and to use these representations in any downstream task.
 
 ---
 
@@ -124,6 +133,8 @@ Sumary. Phasellus diam magna, consequat ac dictum nec, aliquam eu nunc. Aliquam 
 
 <a class="anchor" id="bibliography"></a>
 ### Bibliography
+
+<a class="anchor" id="bib_2014"></a> [1] (^back to: [<sup>Intro</sup>](#ref_2014_0); [<sup>5a</sup>](#ref_2014_5a)) [ [paper](https://www.nature.com/articles/srep06284) | [code](https://github.com/telmomenezes/synthetic) ] <br> Telmo Menezes, & Camille Roth (2014). Symbolic regression of generative network models. *Sci Rep **4***, 6284.
 
 <a class="anchor" id="acknowledgements"></a>
 ### Acknowledgements

@@ -2,7 +2,7 @@
 # Network Symbolic Regression
 
 
-This repository is cloned from the [`synthetic` repository <img src="https://github.com/fluidicon.png" height=14>](https://github.com/telmomenezes/synthetic). It contains a python implementation of the Generative Network Symbolic Regression algorithm <a class="anchor" id="ref_2014_0">[[1]](#bib_2014).
+This repository is cloned from the [`synthetic` repository <img src="https://github.com/fluidicon.png" height=14>](https://github.com/telmomenezes/synthetic). It contains a python implementation of the Generative Network Symbolic Regression algorithm.
 
 💡 *For more information regarding the code, please refer to the original repository.*
 
