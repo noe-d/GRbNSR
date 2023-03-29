@@ -90,17 +90,21 @@ The general idea is to get pre-trained models that can produce vector representa
 ---
 
 
-<a class="anchor" id="reproducibility"></a>
+<a class="anchor" id="nsr"></a>
 ## 🧭 Network Symbolic Regression
 <p align="right">( <a href="./reproducibility">Folder</a> • <a href="./reproducibility/README.md">How to ?</a> • <a href="./repro_evo.ipynb">Demo</a> ) <a href="#top">🔝</a></p>
 
-<details><summary>⚙️ Process</summary><br/>
+The network symbolic regression algorithm is re-encapsulated in the [reproducibility folder](./reproducibility).
 
-</details>
+Besides reproducing the results obtained with the original algorithm, this repository is used to leverage trained DL models to define the notion of distance of the algorithm. Under this framework, the distance is not anymore the difference between hand-engineered features distributions, but the geometric distance between the networks' representation:
 
-<details><summary>🔮 Output</summary><br/>
+<picture>
+  <source media="(prefers-color-scheme: light)" srcset="./illustrations/dist_illust_light.png">
+  <source media="(prefers-color-scheme: dark)" srcset="./illustrations/dist_illust_dark.png">
+  <img alt="Illustration - Distance in Representation Space.">
+</picture>
 
-</details>
+Practical usage of this code is documented in the [repro notebook](./repro.ipynb).
 
 <a class="anchor" id="space_segregation"></a>
 ## 🔎 Space Segregation
@@ -123,24 +127,12 @@ The general idea is to get pre-trained models that can produce vector representa
 </details>
 
 ---
-<a class="anchor" id="structure"></a>
-## 🌵 Repository structure
-<p align="right"><a href="#top">🔝</a></p>
 
 <a class="anchor" id="references"></a>
 ## 📚 References
 <p align="right"><a href="#top">🔝</a></p>
 
-<a class="anchor" id="bibliography"></a>
-### Bibliography
-
 <a class="anchor" id="bib_2014"></a> [1] (^back to: [<sup>Intro</sup>](#ref_2014_0); [<sup>5a</sup>](#ref_2014_5a)) [ [paper](https://www.nature.com/articles/srep06284) | [code](https://github.com/telmomenezes/synthetic) ] <br> Telmo Menezes, & Camille Roth (2014). Symbolic regression of generative network models. *Sci Rep **4***, 6284.
-
-<a class="anchor" id="acknowledgements"></a>
-### Acknowledgements
-
-- XX
-- XX
 
 ---
 <p align="center">
