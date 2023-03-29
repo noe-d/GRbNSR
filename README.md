@@ -108,13 +108,19 @@ Practical usage of this code is documented in the [repro notebook](./repro.ipynb
 
 <a class="anchor" id="space_segregation"></a>
 ## 🔎 Space Segregation
-<p align="right"> ( <a href="./space_seg">Folder</a> • <a href="./space_seg/README.md#-5-usage-">How to ?</a> • <a href="./space_seg.ipynb">Demo</a> ) <a href="#top">🔝</a></p>
+<p align="right"> ( <a href="./space_seg">Folder</a> • <a href="./space_seg.ipynb">Demo</a> ) <a href="#top">🔝</a></p>
 
-<details><summary>⚙️ Process</summary><br/>
+The capabilities of the GRL models to produce semantically segregated representation spaces are probed in [`space_seg`](./space_seg/).
 
-</details>
+This module allows to generate controlled datasets of synthetic graphs based on the notion of *generators* (as introduced for the network symbolic regression).
 
-<details><summary>🔮 Output</summary><br/>
+Then, the custom dataset can be used to assess the ability of the model to represent networks stemming from semantically distinct generative procsesses in different regions of space, or not.
+
+Insights can be drawn from the 2D visualisation of the spatial distribution of the networks representations.
+The evaluation procedure is also systematise through the use of traditional cluster analysis measures.
+
+
+<details><summary>🔮 Visualisation Examples</summary><br/>
 
 <p align="center">
   <picture>

@@ -11,6 +11,7 @@ datasets/
 code_repositories/
 
 saved/
+discarded/
 
 .DS_Store
 
