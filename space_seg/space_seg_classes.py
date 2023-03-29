@@ -249,6 +249,8 @@ class SynEmbAnalyzer():
         self,
         emb_args_list,
         do_plot = False,
+        common_p = False,
+        sparsity_round:int = 3,
     ):
         # 0. check all required metadata
         required_keys = required_keys = ["nodes", "edges", "emb", "family", "generator", "onet"]
@@ -268,15 +270,27 @@ class SynEmbAnalyzer():
         self.unique_vs = sorted(np.unique([ve[0] for ve in computed_ve_pairs]))
         self.unique_es = sorted(np.unique([ve[1] for ve in computed_ve_pairs]))
         
-        self.computed_grid = np.array(
-            [
+        if not common_p
+            self.computed_grid = np.array(
                 [
-                    (v,e) if (v,e) in self.ve_pairs else False
-                    for e in self.unique_es
+                    [
+                        (v,e) if (v,e) in self.ve_pairs else False
+                        for e in self.unique_es
+                    ]
+                    for v in self.unique_vs
                 ]
-                for v in self.unique_vs
-            ]
-        , dtype=object)
+            , dtype=object)
+        
+        if common_p:
+            self.computed_grid = np.array(
+                [
+                    [
+                        (v,np.round(sparsity(v,e), sparsity_round)) if (v,e) in self.ve_pairs else False
+                        for e in self.unique_es
+                    ]
+                    for v in self.unique_vs
+                ]
+            , dtype=object)
         
         # 1.2 organize data
         self.ve_dicts = {}

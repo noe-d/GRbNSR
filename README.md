@@ -119,6 +119,8 @@ Then, the custom dataset can be used to assess the ability of the model to repre
 Insights can be drawn from the 2D visualisation of the spatial distribution of the networks representations.
 The evaluation procedure is also systematise through the use of traditional cluster analysis measures.
 
+The whole pipeline is illustrated in the [companion notebook](./space_seg.ipynb).
+
 
 <details><summary>🔮 Visualisation Examples</summary><br/>
 
@@ -138,7 +140,7 @@ The evaluation procedure is also systematise through the use of traditional clus
 ## 📚 References
 <p align="right"><a href="#top">🔝</a></p>
 
-<a class="anchor" id="bib_2014"></a> [1] (^back to: [<sup>Intro</sup>](#ref_2014_0); [<sup>5a</sup>](#ref_2014_5a)) [ [paper](https://www.nature.com/articles/srep06284) | [code](https://github.com/telmomenezes/synthetic) ] <br> Telmo Menezes, & Camille Roth (2014). Symbolic regression of generative network models. *Sci Rep **4***, 6284.
+<a class="anchor" id="bib_2014"></a> [1] [ [paper](https://www.nature.com/articles/srep06284) | [code](https://github.com/telmomenezes/synthetic) ] <br> Telmo Menezes, & Camille Roth (2014). Symbolic regression of generative network models. *Sci Rep **4***, 6284.
 
 ---
 <p align="center">
