@@ -80,3 +80,11 @@ The representations can be projected to 2 dimensions with t-SNE or PCA for insta
 The assessment is systematised by computed an aggregated coefficient measuring the ability of the model to represent different classes as consistent clusters.
 
 To do so, we measure the silhouette coefficient for each of the generated $(n,m)$ pair.
+
+<p align="center">
+  <picture>
+    <source media="(prefers-color-scheme: light)" srcset="../illustrations/tsne_kde_degs.png">
+    <source media="(prefers-color-scheme: dark)" srcset="../illustrations/tsne_kde_degs_dm.png">
+    <img width=80% alt="Illustration - Space Discrimination from degrees.">
+  </picture>
+</p>

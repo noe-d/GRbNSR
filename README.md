@@ -126,8 +126,8 @@ The whole pipeline is illustrated in the [companion notebook](./space_seg.ipynb)
 
 <p align="center">
   <picture>
-    <source media="(prefers-color-scheme: light)" srcset="./illustrations/tsne_kde_graphmae.png">
-    <source media="(prefers-color-scheme: dark)" srcset="./illustrations/tsne_kde_graphmae.png">
+    <source media="(prefers-color-scheme: light)" srcset="./illustrations/tsne_gmm_degs.png">
+    <source media="(prefers-color-scheme: dark)" srcset="./illustrations/tsne_gmm_degs_dm.png">
     <img width=80% alt="Illustration - Space Discrimination from degrees.">
   </picture>
 </p>
