@@ -169,9 +169,9 @@ First note that all computation were undertaken on a MacBook Pro (M1, 2020).
 The expected runtimes for the training are shown in the following table:
 
 |Model type|Configuration|Average training time|Av. epoch time|
-|:---|:---:|---:|---:|---:|
+|:---|:---:|---:|---:|
 |GraphMAE|[config link](./Configs/config_files/config_graphmae_repro.json)|02:23:14|00:01:54|
-|PGCL|[config link](./Configs/config_files/config_pgcl_repro.json)|07:01:16|00:04:49|
+|PGCL| [config link](./Configs/config_files/config_pgcl_repro.json) |07:01:16|00:04:49|
 
 #### <a class="anchor" id="performances"></a> Classification performances
 

@@ -60,7 +60,10 @@ Initialising distance metric...
 Stable gens:  12%|██                   | 121/1000 [00:27<03:39,  4.01it/s, #=7, loss=0.00555, size=21]
 ```
 
-When the computation is finished it will output information about the best found generator (the one with lowest associated loss) over the different runs for each given network
+When the computation is finished it will output information about the best found generator (the one with lowest associated loss) over the different runs for each given network. In the example only one run was undertook over one network instance, the output is:
+```
+{'k_1': {'best_run_id': 0, 'best_run_path': './data/repro_PGCL_PA/k_1.0/', 'best_fit': 0.0055505693890154, 'n_runs': 1}}
+```
 
 </details>
 
