@@ -16,7 +16,7 @@
 
 ![files](https://tokei.rs/b1/github/noe-d/AlignmentTool?category=files) ![codelines](https://tokei.rs/b1/github/noe-d/AlignmentTool?category=code) ![comments](https://tokei.rs/b1/github/noe-d/AlignmentTool?category=comments)
 
-*[WIP] This repository needs to be further cleaned.*
+*[🚧] This repository needs to be further cleaned.*
 
 <a class="anchor" id="repository_goals"></a>
 ## 🏔 Repository goals
@@ -27,10 +27,6 @@ The present repository hosts the code to replicate the experiments presented in 
 The main goal of this repository is to better understand Graph Representation Learning through the empirical analysis of the spatial representation induced by such models, as well as probing their efficiency in tasks departing from standard classification.
 
 The repository provides two foundation modules, [`DL_module`](./DL_module/) and [`synthetic`](./synthetic/), together with ensuing analysis and application modules: [`reproducibility`](./reproducibility/) and [`space_seg`](./space_seg/).
-
-TODO:
-- [ ] motivations / research questions / aims
-- [ ] different resources gathered etc.
 
 <a class="anchor" id="quick_start"></a>
 ## 🚞 Quick Start
@@ -49,13 +45,17 @@ TODO:
 
 ### Run the code
 
-TODOs:
-- [ ] download options (code and data)
-- [ ] train DL model
-  - [ ] assess performances
-  - [ ] visualise embeddings
-- [ ] analyse segregative capabilities on synthetic generated graphs
-- [ ] reproduce symbolic regression
+To run the code, please refer to the folders sheltering the different moduels described below, their associated folders and/or the demo notebooks:
+- [Deep Graph Representation Learning](#dl_module): [ 🗂 Folder ](./DL_module/) | [ 📓 Notebook ](./DL_module/pipeline.ipynb)
+- [Network symbolic Regression](#nsr): [ 🗂 Folder ](./reproducibility) | [ 📓 Notebook ](repro_test.ipynb)
+- [Spatial Segregation Analysis](#space_segregation): [ 🗂 Folder ](./space_seg/) | [ 📓 Notebook ](space_seg.ipynb)
+
+The natural pipeline is to:
+1. first [train](./DL_module/README.md#-5-usage-) deep GRL models (or download them);
+2. then [generate a dataset](./space_seg/README.md) of synthetic networks with known generative processes (or download it);
+3. a) analyse the [capabilities of the models to cluster networks](./space_seg/README.md#-analysis-synembanalyzer) stemming from different generators in distinct regions of space.
+  b) And / Or : perform [network symbolic regression](./reproducibility/README.md#replication), using the pre-trained GRL model to compute the distance between networks directly in the representation space.
+
 
 
 ---

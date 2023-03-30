@@ -7,11 +7,6 @@ The symbolic regression is re-encapsulated here. You can run symbolic regression
 python ./reproducibility/evolutionary_search.py
 ```
 
-which takes the arguments:
-TODO:
-- [ ] Describe arguments that can be parsed
-- [ ] Implement parser
-
 Default arguments are stored in the `.py` file. They can also be parsed from command line interface:
 
 | Arguments | Description | Default |
