@@ -34,7 +34,7 @@ Default arguments are stored in the `.py` file. They can also be parsed from com
 | `--bins` | if using traditional approach: number of bins used in the histograms to compute dissimilarities | Default `synthetic` bins |
 | `--max_dist` | maximal distance value (cut-off) | Default `synthetic` max distance |
 | `--rw` | use random walk distance | `True` |
-| `--force_trad` | force to use the traditional approach | False | 
+| `--force_trad` | force to use the traditional approach | `False` |
 
 
 
@@ -59,6 +59,8 @@ Nets files :  ['k_1.pickle']
 Initialising distance metric...
 Stable gens:  12%|██                   | 121/1000 [00:27<03:39,  4.01it/s, #=7, loss=0.00555, size=21]
 ```
+
+When the computation is finished it will output information about the best found generator (the one with lowest associated loss) over the different runs for each given network
 
 </details>
 
