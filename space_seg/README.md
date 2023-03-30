@@ -7,11 +7,11 @@
 ## ⚡️ Quick Start
 <p align="right"><a href="#top">🔝</a></p>
 
-TODO:
-- [ ] download the dataset
-- [ ] download the pre-trained model (or use traditional statistics)
-- [ ] run the script
-- [ ] links: more details about generation, embedding computation, analysis
+1. Download / pre-train or implement the Graph Representation method to be studied
+1. Generate or download a dataset with known graph generative processes
+1. Visualise the networks' spatial distributions based on their families and their vector representations
+1. Systematise the analysis by leveraging spatial analysis methods
+
 
 > **Note**
 > You can directly launch the [companion notebook 🔗](../space_seg.ipynb) for a step-by-step tutorial.
