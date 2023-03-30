@@ -1,4 +1,4 @@
-i# Byte-compiled / optimized / DLL files
+# Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
 *$py.class
@@ -12,6 +12,8 @@ code_repositories/
 
 saved/
 discarded/
+
+WIP_drafts.ipynb
 
 .DS_Store
 

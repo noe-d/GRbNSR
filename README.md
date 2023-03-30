@@ -34,14 +34,14 @@ The repository provides two foundation modules, [`DL_module`](./DL_module/) and 
 
 ### Set up
 
-```shell
-conda create -n env_grl python=3.10.6 jupyterlab
-pip install -r requirements.txt
-```
+It is recommended to create a work environment, and to install the required packages in the environment with the following command line:
 
-TODO:
-- [ ] coarse description of the content of the folder
-- [ ] instructions on how to make things run / set up
+```shell
+conda create -n env_grbnsr python=3.10.6 jupyterlab
+conda activate env_grbnsr
+pip install -r requirements.txt
+conda install graph-tool
+```
 
 ### Run the code
 

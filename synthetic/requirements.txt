@@ -1,0 +1,9 @@
+dgl==0.9.1
+numpy==1.23.4
+progressbar33==2.4
+pyemd==0.5.1
+python_igraph==0.10.4
+scipy==1.9.3
+synthetic==0.0.1
+termcolor==2.2.0
+tqdm==4.64.1
