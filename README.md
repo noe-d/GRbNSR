@@ -3,18 +3,15 @@
 <p align="center">
  • <a href="#repository_goals">🏔</a>
  • <a href="#quick_start">🚞</a>
- • <a href="#roadmap">🛤</a>
  • <a href="#synthetic">🌳</a> 
  • <a href="#dl_module">🌊</a>
- • <a href="#reproducibility">🎰</a>
+ • <a href="#nsr">🧭</a>
  • <a href="#space_segregation">🔭</a>
- • <a href="#additional_experiments">🧫</a>
- • <a href="#structure">🌵</a>
  • <a href="#references">📚</a>
  •
 </p>
 
-![files](https://tokei.rs/b1/github/noe-d/AlignmentTool?category=files) ![codelines](https://tokei.rs/b1/github/noe-d/AlignmentTool?category=code) ![comments](https://tokei.rs/b1/github/noe-d/AlignmentTool?category=comments)
+![files](https://tokei.rs/b1/github/noe-d/GRbNSR?category=files) ![codelines](https://tokei.rs/b1/github/noe-d/GRbNSR?category=code)
 
 *[🚧] This repository needs to be further cleaned.*
 
@@ -146,12 +143,10 @@ The whole pipeline is illustrated in the [companion notebook](./space_seg.ipynb)
 <p align="center">
  • <a href="#repository_goals">🏔</a>
  • <a href="#quick_start">🚞</a>
- • <a href="#synthetic">🌳</a>
+ • <a href="#synthetic">🌳</a> 
  • <a href="#dl_module">🌊</a>
- • <a href="#reproducibility">🎰</a>
+ • <a href="#nsr">🧭</a>
  • <a href="#space_segregation">🔭</a>
- • <a href="#additional_experiments">🧫</a>
- • <a href="#structure">🌵</a>
  • <a href="#references">📚</a>
  •
 </p>
